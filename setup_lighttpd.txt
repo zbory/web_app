@@ -1,0 +1,9 @@
+sudo lighttpd-enable-mod proxy
+
+conf: 
+server.modules += ( "mod_proxy" )
+
+# proxy requests that start with /api/
+$HTTP["host"] == "yourdomain.com" {
+    proxy.server = ( "/" => ( ( "host" => "127.0.0.1", "port" => 5000 ) ) )
+}
